@@ -27,8 +27,8 @@
     <!-- Head[End] -->
 
     <!-- Main[Start] -->
+    メールアドレスとパスワードを入力してください
     <form method="post" action="register_insert.php">
-        <label>名前<input type="text" name="u_name"></label><br>
         <label>メールアドレス<input type="text" name="u_mail"></label><br>
         <label>パスワード<input type="text" name="u_pass"></label><br>
         <button type="submit" class="btn btn-primary">送信</button>

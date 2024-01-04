@@ -24,8 +24,7 @@ require_once("funcs.php");
     <header>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
-                <a class="navbar-brand" href="register.php">会員登録</a>
-                <a class="navbar-brand" href="login.php">ログイン</a>
+                <a class="navbar-brand" href="mypage_select.php">マイページ</a>
             </div>
         </nav>
     </header>

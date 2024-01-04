@@ -7,12 +7,11 @@ $u_mail=$_POST["u_mail"];
 $u_pass=$_POST["u_pass"];
 
 //1.  DB接続します
-db_conn();
 $pdo = db_conn();
 
 //2. データ登録SQL作成
 // gs_user_tableに、IDとWPがあるか確認する。
-$sql="SELECT * FROM profile WHERE u_mail=:u_mail AND u_pass=:u_pass";
+$sql="SELECT * FROM useradmin WHERE u_mail=:u_mail AND u_pass=:u_pass";
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':u_mail', $u_mail ,PDO::PARAM_STR);
 $stmt->bindValue(':u_pass', $u_pass ,PDO::PARAM_STR);
@@ -35,7 +34,7 @@ if( $val['u_id'] != ''){
     $_SESSION['u_name'] = $val['u_name'];
     // セッションにログインしているユーザーのIDを挿入する
     $_SESSION['u_id'] = $val['u_id'];
-    header('Location:index.php');
+    header('Location:con_register.php');
     exit();
 }else{
     //Login失敗時(Logout経由)
