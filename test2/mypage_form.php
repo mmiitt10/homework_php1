@@ -1,11 +1,8 @@
+
 <?php
 session_start();
-
-// ログインしていない場合は表示できない
-if(!isset($_SESSION["u_id"])) {
-    header('Location:login.php');
-    exit("User is not logged in.");
-}
+require_once("funcs.php");
+chk_ssid();
 ?>
 
 <!DOCTYPE html>

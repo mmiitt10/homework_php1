@@ -1,18 +1,12 @@
 <?php
-// 共通準備
 session_start();
-require_once('funcs.php');
+require_once("funcs.php");
+chk_ssid();
 
 //1.  DB接続
 $pdo = db_conn();
 
 //２．データ取得SQL作成
-// ログインしていない場合は表示できない
-if(!isset($_SESSION["u_id"])) {
-    header('Location:login.php');
-    exit("User is not logged in.");
-}
-
 // 会員情報を抽出
 $stmt1 = $pdo->prepare("SELECT * FROM useradmin WHERE u_id = :u_id");
 $stmt1->bindValue(':u_id', $_SESSION["u_id"], PDO::PARAM_INT);

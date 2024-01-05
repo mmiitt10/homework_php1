@@ -1,18 +1,12 @@
 <?php
-// 共通準備
 session_start();
-require_once('funcs.php');
+require_once("funcs.php");
+chk_ssid();
 
 //1.  DB接続
 $pdo = db_conn();
 
 //２．データ取得SQL作成
-// ログインしていない場合は表示できない
-if(!isset($_SESSION["u_id"])) {
-    header('Location:login.php');
-    exit("User is not logged in.");
-}
-
 // 会員情報を抽出
 $stmt1 = $pdo->prepare("SELECT * FROM useradmin WHERE u_id = :u_id");
 $stmt1->bindValue(':u_id', $_SESSION["u_id"], PDO::PARAM_INT);
@@ -82,9 +76,11 @@ $results3 = $stmt3->fetchAll();
         <!-- 登録コンテンツ表示 -->
         <div class="contents">
             <h2>登録コンテンツ</h2>
+            <form action="con_register.php" method="post">
+                <button type="submit" class="btn btn-primary">コンテンツを登録する</button>
+            </form>
             <?php foreach ($results3 as $row): ?>
                 <div class="content">
-                    <input type="hidden" value=<?php echo h($row['con_category'])?>>
                     <p>カテゴリ: <?php echo h($row['con_category'])?></p>
                     <p>コンテンツ名: <?php echo h($row['con_input_name']) ?></p>
                     <p>タイトル: <?php echo h($row['con_title']) ?></p>
@@ -92,12 +88,14 @@ $results3 = $stmt3->fetchAll();
                     <p>URL: <?php echo h($row['con_url']) ?></p>
 
                     <!-- 更新ボタン -->
-                    <form action="con_detail.php" method="post">                        
+                    <form action="con_detail.php" method="post"> 
+                        <input type="hidden" name="con_id" value="<?php echo h($row['con_id']); ?>">                       
                         <input type="submit" value="更新する">
                     </form>
 
                     <!-- 削除ボタン -->
                     <form action="con_delete.php" method="post">
+                        <input type="hidden" name="con_id" value="<?php echo h($row['con_id']); ?>">                       
                         <input type="submit" value="削除する">
                     </form>
                 </div>

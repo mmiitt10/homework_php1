@@ -1,3 +1,4 @@
+<!-- 会員登録用のフロントページ -->
 
 <!DOCTYPE html>
 <html lang="ja">

@@ -1,3 +1,5 @@
+<!-- ログイン用の動作ページ -->
+
 <?php
 session_start();
 require_once('funcs.php');
@@ -34,7 +36,7 @@ if( $val['u_id'] != ''){
     $_SESSION['u_name'] = $val['u_name'];
     // セッションにログインしているユーザーのIDを挿入する
     $_SESSION['u_id'] = $val['u_id'];
-    header('Location:con_register.php');
+    header('Location:mypage_select.php');
     exit();
 }else{
     //Login失敗時(Logout経由)

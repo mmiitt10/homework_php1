@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once("funcs.php");
+chk_ssid();
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +33,7 @@ require_once("funcs.php");
 
     <!-- Main[Start] -->
     <p>ようこそ<?php echo h($_SESSION['u_name'])?>さん。読んだ書籍や記事などを登録してください</p>
-    <form method="post" action="insert.php">
+    <form method="post" action="con_insert.php">
         <label>コンテンツのカテゴリ<input type="text" name="con_category"></label><br>
         <label>コンテンツ名<input type="text" name="con_input_name"></label><br>
         <label>タイトル<input type="text" name="con_title"></label><br>
@@ -42,5 +43,4 @@ require_once("funcs.php");
     </form>
     <!-- Main[End] -->
 </body>
-
 </html>

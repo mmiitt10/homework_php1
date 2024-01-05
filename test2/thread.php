@@ -1,31 +1,34 @@
 <?php
-// 共通準備
 session_start();
-require_once('funcs.php');
+require_once("funcs.php");
+chk_ssid();
 
 //1.  DB接続
 $pdo = db_conn();
 
 //２．データ取得SQL作成
-// ログインしていない場合は表示できない
-if(!isset($_SESSION["u_id"])) {
-    header('Location:login.php');
-    exit("User is not logged in.");
-}
-
-// 個人情報を抽出
-$stmt1 = $pdo->prepare("SELECT * FROM useradmin");
+// 会員情報を抽出
+$stmt1 = $pdo->prepare("SELECT * FROM useradmin WHERE u_id = :u_id");
 $stmt1->bindValue(':u_id', $_SESSION["u_id"], PDO::PARAM_INT);
 $stmt1->execute();
 $results1 = $stmt1->fetchAll();
-$row=$results1[0];
+$row1=$results1[0];
 
-// 登録情報を抽出
-$stmt2 = $pdo->prepare("SELECT * FROM contents");
-$stmt2->bindValue(':u_id', $_SESSION["u_id"], PDO::PARAM_INT);
+// プロフィール情報を抽出
+$stmt2 = $pdo->prepare("SELECT * FROM profile");
 $stmt2->execute();
 $results2 = $stmt2->fetchAll();
 
+// コンテンツ情報に紐づけるためにプロフィール情報を連想配列に格納
+$profiles = [];
+foreach ($results2 as $profile) {
+    $profiles[$profile['u_id']] = $profile;
+};
+
+// コンテンツ情報を抽出
+$stmt3 = $pdo->prepare("SELECT * FROM contents");
+$stmt3->execute();
+$results3 = $stmt3->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -56,17 +59,18 @@ $results2 = $stmt2->fetchAll();
         </nav>
     </header>
     <main>
-        <!-- 個人情報表示 -->
-        <div class="profile">
-            <h2>プロフィール情報</h2>
-            <p>名前: <?php echo h($row['u_name']) ?></p>
-        </div>
-
-        <!-- 登録コンテンツ表示 -->
+        <!-- 投稿を表示 -->
         <div class="contents">
-            <h2>登録コンテンツ</h2>
-            <?php foreach ($results2 as $row): ?>
+            <?php foreach ($results3 as $row): ?>
                 <div class="content">
+                <!-- 対応するプロフィール情報を取得 -->
+                    <?php $profile = $profiles[$row['u_id']] ?? null;
+                    if ($profile): ?>
+                    <a href="">
+                        <p>ユーザー名: <a href="user_page.php?u_id=<?php echo h($profile['u_id']); ?>"><?php echo h($profile['u_name']); ?></a></p>
+                        <p>所属企業: <?php echo h($profile['company']); ?></p>
+                        <p>役職: <?php echo h($profile['position']); ?></p>
+                    <?php endif; ?>
                     <p>カテゴリ: <?php echo h($row['con_category'])?></p>
                     <p>コンテンツ名: <?php echo h($row['con_input_name']) ?></p>
                     <p>タイトル: <?php echo h($row['con_title']) ?></p>

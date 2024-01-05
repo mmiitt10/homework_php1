@@ -1,6 +1,8 @@
+<!-- ログアウト用の動作ページ -->
+
 <?php
-//必ずsession_startは最初に記述
 session_start();
+require_once("funcs.php");
 
 //SESSIONを初期化（空っぽにする）
 $_SESSION = [];

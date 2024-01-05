@@ -1,20 +1,12 @@
 <?php
-// 共通準備
 session_start();
-require_once('funcs.php');
+require_once("funcs.php");
+chk_ssid();
 
 //1.  DB接続
 $pdo = db_conn();
 
 //２．データ取得SQL作成
-// ログインしていない場合は表示できない
-if(!isset($_SESSION["u_id"])) {
-    header('Location:login.php');
-    exit("User is not logged in.");
-}
-
-$con_id=$_GET['con_id'];
-
 // 会員情報を抽出
 $stmt1 = $pdo->prepare("SELECT * FROM useradmin WHERE u_id = :u_id");
 $stmt1->bindValue(':u_id', $_SESSION["u_id"], PDO::PARAM_INT);
@@ -34,7 +26,7 @@ $stmt3 = $pdo->prepare("SELECT * FROM contents WHERE con_id = :con_id");
 $stmt3->bindValue(':con_id', $con_id, PDO::PARAM_INT);
 $stmt3->execute();
 $results3 = $stmt3->fetchAll();
-
+$row3= $results3[0];
 ?>
 
 <!DOCTYPE html>
@@ -66,7 +58,7 @@ $results3 = $stmt3->fetchAll();
 
     <!-- Main[Start] -->
     <p>ようこそ<?php echo h($_SESSION['u_name'])?>さん。登録した内容を書き換えてください</p>
-    <form method="post" action="insert.php">
+    <form method="post" action="con_update.php">
         <label>コンテンツのカテゴリ<input type="text" name="con_category" value=<?= $row3["con_category"]?>></label><br>
         <label>コンテンツ名<input type="text" name="con_input_name" value=<?= $row3["con_input_name"]?>></label><br>
         <label>タイトル<input type="text" name="con_title" value=<?= $row3["con_title"]?>></label><br>

@@ -29,7 +29,7 @@ $status = $stmt->execute(); //実行
 if ($status == false) {
     sql_error($stmt);
 } else {
-    header('Location:con_register.php');
+    header('Location:mypage_select.php');
 }
 
 ?>

@@ -1,3 +1,4 @@
+<!-- 会員登録用の登録動作ページ -->
 
 <?php
 require_once('funcs.php');
@@ -7,7 +8,6 @@ $u_mail=$_POST["u_mail"];
 $u_pass=$_POST["u_pass"];
 
 //2. DB接続します
-db_conn();
 $pdo = db_conn();
 
 //３．データ登録SQL作成
