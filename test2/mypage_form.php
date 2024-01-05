@@ -34,6 +34,8 @@ chk_ssid();
     <!-- Head[End] -->
 
     <!-- Main[Start] -->
+    インプットマネジメントへようこそ！<br>
+    あなたについて詳しく教えてください<br>
     <form method="post" action="mypage_insert.php">
         <label>氏名<input type="text" name="u_name"></label><br>
         <label>生年月日<input type="date" name="birthday"></label><br>

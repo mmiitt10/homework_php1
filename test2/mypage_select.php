@@ -27,6 +27,17 @@ $stmt3->bindValue(':u_id', $_SESSION["u_id"], PDO::PARAM_INT);
 $stmt3->execute();
 $results3 = $stmt3->fetchAll();
 
+// 最初のログイン時は会員情報登録を実施し、複数回目のログイン時は会員名をセッションに与える
+if(!$row2 || empty($row2['u_name'])){
+    header("Location: mypage_form.php");
+    exit();
+} else {
+    // u_nameが設定されている場合はセッション情報にu_nameを挿入
+    $_SESSION['u_name'] = $row2['u_name'];
+}
+
+// オンボーディングとして、コンテンツを登録していない人は、会員情報登録後に複数個のコンテンツを登録するようにしたい
+// コンテンツを3つほど登録したら、指向が近い人が自動的にレコメンドされるイメージ
 ?>
 
 <!DOCTYPE html>
@@ -76,8 +87,11 @@ $results3 = $stmt3->fetchAll();
         <!-- 登録コンテンツ表示 -->
         <div class="contents">
             <h2>登録コンテンツ</h2>
+            <form action="book_register.php" method="post">
+                <button type="submit" >読んだ本を登録する</button>
+            </form>
             <form action="con_register.php" method="post">
-                <button type="submit" class="btn btn-primary">コンテンツを登録する</button>
+                <button type="submit" >本以外のコンテンツを登録する</button>
             </form>
             <?php foreach ($results3 as $row): ?>
                 <div class="content">
