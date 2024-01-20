@@ -3,6 +3,13 @@ session_start();
 require_once("funcs.php");
 chk_ssid();
 
+$con_id=$_POST["con_id"];
+
+// バリデーション: $con_idが空でないことを確認
+if (!$con_id) {
+    echo "コンテンツIDが指定されていません。";
+    exit;
+}
 //1.  DB接続
 $pdo = db_conn();
 
@@ -26,6 +33,12 @@ $stmt3 = $pdo->prepare("SELECT * FROM contents WHERE con_id = :con_id");
 $stmt3->bindValue(':con_id', $con_id, PDO::PARAM_INT);
 $stmt3->execute();
 $results3 = $stmt3->fetchAll();
+
+if (count($results3) === 0) {
+    echo "指定されたコンテンツが見つかりません。";
+    exit;
+}
+
 $row3= $results3[0];
 ?>
 
@@ -50,7 +63,12 @@ $row3= $results3[0];
     <header>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
+                <a class="navbar-brand" href="login.php">ログイン</a>
+                <a class="navbar-brand" href="logout_act.php">ログアウト</a>
+                <a class="navbar-brand" href="thread.php">スレッド</a>
                 <a class="navbar-brand" href="mypage_select.php">マイページ</a>
+                <a class="navbar-brand" href="book_register.php">本を登録する</a>
+                <a class="navbar-brand" href="con_register.php">その他のコンテンツを登録する</a>
             </div>
         </nav>
     </header>

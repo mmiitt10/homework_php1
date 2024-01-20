@@ -26,7 +26,9 @@ chk_ssid();
     <header>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
-                <a class="navbar-brand" href="thread.php">スレッドに戻る</a>
+                <a class="navbar-brand" href="thread.php">スレッド</a>
+                <a class="navbar-brand" href="book_register.php">本を登録する</a>
+                <a class="navbar-brand" href="con_register.php">その他のコンテンツを登録する</a>
                 <a class="navbar-brand" href="logout_act.php">ログアウト</a>
             </div>
         </nav>

@@ -43,7 +43,7 @@ $total_pages = ceil($total_items / $items_per_page);
 
 <head>
     <meta charset="UTF-8">
-    <title>コンテンツ登録</title>
+    <title>書籍情報登録</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <style>
         div {
@@ -59,8 +59,10 @@ $total_pages = ceil($total_items / $items_per_page);
     <header>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
+                <a class="navbar-brand" href="thread.php">スレッド</a>
+                <a class="navbar-brand" href="con_register.php">その他のコンテンツを登録する</a>
                 <a class="navbar-brand" href="mypage_select.php">マイページ</a>
-            </div>
+                <a class="navbar-brand" href="logout_act.php">ログアウト</a>            </div>
         </nav>
     </header>
     <!-- Head[End] -->

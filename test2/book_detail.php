@@ -33,7 +33,7 @@ $volumeInfo = $book_detail->volumeInfo;
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>コンテンツ登録</title>
+    <title>『<?php echo h($volumeInfo->title)?>』の詳細ページ</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <style>
         div {
@@ -47,7 +47,10 @@ $volumeInfo = $book_detail->volumeInfo;
     <header>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
+                <a class="navbar-brand" href="thread.php">スレッド</a>
+                <a class="navbar-brand" href="con_register.php">その他のコンテンツを登録する</a>
                 <a class="navbar-brand" href="mypage_select.php">マイページ</a>
+                <a class="navbar-brand" href="logout_act.php">ログアウト</a>            
             </div>
         </nav>
     </header>

@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('funcs.php');
+chk_ssid();
 
 //1. POSTデータ取得
 $con_category   = $_POST['con_category'];
