@@ -3,7 +3,8 @@ session_start();
 require_once("funcs.php");
 chk_ssid();
 
-$con_id=$_POST["con_id"];
+$con_id = $_GET["con_id"];
+// $con_id=$_POST["con_id"];
 
 // バリデーション: $con_idが空でないことを確認
 if (!$con_id) {

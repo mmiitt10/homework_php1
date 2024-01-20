@@ -35,13 +35,14 @@ chk_ssid();
     <!-- Head[End] -->
 
     <!-- Main[Start] -->
-    <p>ようこそ<?php echo h($_SESSION['u_name'])?>さん。読んだ記事などの情報を登録してください</p>
+    <p>ようこそ<?php echo h($_SESSION['u_name'])?>さん。読んだWeb記事を登録してください</p>
     <form method="post" action="con_insert.php">
-        <label>コンテンツのカテゴリ<input type="text" name="con_category"></label><br>
-        <label>コンテンツ名<input type="text" name="con_input_name"></label><br>
-        <label>タイトル<input type="text" name="con_title"></label><br>
-        <label>内容<input type="text" name="con_detail"></label><br>
+        <input type="hidden" name="con_category" >
+        <input type="hidden" name="con_input_name" >
+        <input type="hidden" name="con_title" >
+        <input type="hidden" name="con_detail" >
         <label>コンテンツのURL<input type="text" name="con_url"></label><br>
+        <label><input type="hidden" name="con_id"></label><br>
         <button type="submit" class="btn btn-primary">送信</button>
     </form>
     <!-- Main[End] -->
